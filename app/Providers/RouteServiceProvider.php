@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Models\User;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -23,9 +24,16 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //全局正则
+        //Route::pattern('id' , '[0-9]+');
 
         parent::boot();
+
+        //路由模型显式绑定（命名空间有相对性，注意取绝对值）
+        //Route::model('user',\App\Models\User::class);////////////似乎加不加没什么变化
+
+        //自定义解析逻辑
+        //Route::bind('user',function($value){return \App\Models\User::where('email',$value)->first();});//配置与否似乎没变化
     }
 
     /**

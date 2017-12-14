@@ -24,6 +24,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        //Route::pattern('p1', '[0-9]+');//路由//正则约束//全局约束
 
         parent::boot();
     }

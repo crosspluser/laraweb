@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('foo', function () {
     //dd(Route::current());//当前路由
-    dd(Route::currentRouteName());//当前路由名字（不是url，是自定义名字）
+    //dd(Route::currentRouteName());//当前路由名字（不是url，是自定义名字）
     //return route('foo-get',['id'=>1]);//查看路由地址及参数
     return 'GET foo';
 })->name('foo-get');
@@ -61,7 +61,10 @@ Route::get('user/{user}',function(App\Models\User $user){
    return $user;
 });
 
-
+//中间件
+Route::middleware(['CheckAge'])->get('mid',function(){
+    return 1;
+});
 
 
 

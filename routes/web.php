@@ -49,4 +49,11 @@ Route::get('param_select/{p1?}',function($p1=''){
 });
 //正则约束
 
-//命名路由
+//命名路由：路由名不包括参数
+Route::get('/name/{p1?}', function($p1=''){
+    return [$p1,route('name')];
+})->name('name');
+//命名路由转发：转发多个参数
+Route::get('/name_redirect/{p1?}', function($p1=''){
+    return redirect()->route('name', [$p1,'add'=>$p1]);
+});

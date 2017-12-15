@@ -20,6 +20,10 @@ Route::get( 'foo', function(){
     return 'foo';
 } );
 
+Route::put( 'form_method', function(){
+    return 'form_method';
+} );
+
 //匹配路由
 Route::match( [ 'get', 'post' ], '/match', function(){
     return 'match';
@@ -50,10 +54,35 @@ Route::get( 'param_select/{p1?}', function( $p1 = '' ){
 //正则约束
 
 //命名路由：路由名不包括参数
-Route::get( '/name/{p1?}', function( $p1 = '' ){
-    return [ $p1, route( 'name' ) ];
-} )->name( 'name' );
-//命名路由转发：转发多个参数
+Route::get( '/name/{p1?}', 'UserController@name' )->name( 'name' );
+//命名路由转发：如果转发多个参数，第一个匹配路由，后面的按顺序拼接?&
 Route::get( '/name_redirect/{p1?}', function( $p1 = '' ){
     return redirect()->route( 'name', [ $p1, 'add' => $p1 ] );
+} );
+
+//路由组
+//中间件：可以重复，必须命名
+Route::middleware( [ 'web', 'web' ] )->group( function(){
+} );
+//命名空间：针对控制器
+Route::namespace( 'Admin' )->group( function(){
+    //Admin=App\Http\Controllers\Admin
+} );
+//子域名路由：可以匹配使用
+Route::domain( '{account}.laravel.com' )->group( function(){
+    Route::get( 'subdomain', function( $account ){
+    } );
+} );
+//路由前缀
+Route::prefix( 'admin' )->group( function(){
+} );
+
+//路由模型绑定
+//隐式绑定：默认只能用ID，可以在模型里用方法指定字段
+Route::get( 'user/{user}', function( App\User $user ){
+    return $user;
+} );
+//显式绑定：没发现区别，一样受model方法影响
+Route::get( 'user2/{user}', function( App\User $user ){
+    return $user;
 } );

@@ -82,6 +82,20 @@
                     Hi! {{$name ?? ''}}
                 </div>
 
+                <form action="/form_method" method="POST">
+                    <input name="name" value="method">
+                    <input name="_method" value="PUT">
+                    <input name="_token" value="{{ csrf_token() }}">
+                    <button type="submit">submit</button>
+                </form>
+
+                <form action="/form_method" method="POST">
+                    <input name="name" value="method_auto">
+                    {{ method_field('PUT') }}
+                    <input name="_token" value="{{ csrf_token() }}">
+                    <button type="submit">submit</button>
+                </form>
+
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="https://laracasts.com">Laracasts</a>

@@ -27,6 +27,12 @@ class RouteServiceProvider extends ServiceProvider
         //Route::pattern('p1', '[0-9]+');//路由//正则约束//全局约束
 
         parent::boot();
+
+        //Route::model('user', \App\User::class);//显式绑定
+
+        /*Route::bind('user', function($value){
+            return \App\User::where('name',$value)->first();
+        });//自定义解析逻辑*/
     }
 
     /**

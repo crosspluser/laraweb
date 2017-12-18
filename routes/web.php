@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//CSRF：会提示过期，前后端分离时注意通讯协议
+Route::get('/csrf',function(){
+    return view('csrf');
+});
+
+//CSRF白名单
+Route::post('/csrf/white',function(){
+    return 'CSRF white';
+});

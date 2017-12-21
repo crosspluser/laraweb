@@ -13,5 +13,6 @@ class EncryptCookies extends Middleware
      */
     protected $except = [
         //
+        'customize'//设置不加密;laravel默认加密value
     ];
 }

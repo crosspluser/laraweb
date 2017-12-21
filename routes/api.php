@@ -42,4 +42,17 @@ Route::any( '/request', function( Request $request ){
     ];
 } )->name('');
 
-//PSR-7 请求：一种更开放的接口标准，用到再研究
+
+
+//文件
+Route::post('upload',function (Request $request){
+    //$file = $request->file->storeAs('images', 'filename.json');//存储
+    return [
+        'isValid' => $request->file('file')->isValid(),
+        'hasFile' => $request->hasFile('file'),
+        'file_file' => $request->file('file'),
+        'file' => $request->file,
+        'path' => $request->file->path(),
+        'extension' => $request->file->extension(),
+    ];
+});

@@ -101,6 +101,16 @@ Route::get('download',function(){
     return response()->download('css/app.css','样式');//可以传header,;可以设置deleteFileAfterSend(true),以删除临时文件等
 });
 
+//文件响应
+Route::get('file',function(){
+    return response()->file('css/app.css');//直接显示文件;第二个参数可以设置请求头
+});
+
+//响应宏
+Route::get('macro',function(){
+    return response()->caps('foo');
+});
+
 /**
  * 待续
  */

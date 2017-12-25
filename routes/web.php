@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Validator;
+
 Route::get( '/', function(){
     return view( 'welcome' );
 } );
@@ -39,12 +41,33 @@ Route::post( 'validate', function( \Illuminate\Http\Request $request ){
     ];
 } );
 
+//表单请求验证
+//搭配使用
 Route::post( 'make/request', function( App\Http\Requests\User\Insert $request ){
     return [
         'request'  => $request,
         'name'     => $request->input( 'name' ),
         'password' => $request->input( 'password' ),
     ];
+} );
+
+//手动创建验证器
+Route::post( 'make', function( \Illuminate\Http\Request $request ){
+    //$validator = Validator::make( $request->all(), [ 'name' => 'required' ] )->fails();
+    $validator = Validator::make( $request->all(), [ 'name' => 'required' ] );//可以连续使用
+    if( $validator->fails() ){
+        return 0;//redirect('post/create')->withErrors($validator)->withInput();//如果跳转,带上错误和输入
+    }
+
+    return 1;
+} );
+
+//自动重定向
+//或返回json
+Route::post( 'make/request', function( \Illuminate\Http\Request $request ){
+    Validator::make( $request->all(), [
+        'name' => 'required',
+    ] )->validate();
 } );
 
 /**

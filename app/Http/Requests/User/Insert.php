@@ -11,6 +11,7 @@ class Insert extends FormRequest{
      *
      * @return bool
      */
+    //授权表单请求
     public function authorize(){
         //dd($this->user());//能够获取,但不知通过什么判断
         return true;//false//用户访问权限
@@ -21,6 +22,7 @@ class Insert extends FormRequest{
      *
      * @return array
      */
+    //创建表单请求
     public function rules(){
         return [
             //
@@ -29,7 +31,7 @@ class Insert extends FormRequest{
         ];
     }
 
-    //信息,重写方法,更多参见父类
+    //自定义错误消息:重写方法,更多参见父类
     public function messages(){
         return [
             'name.required'     => ':attribute 必须传入',

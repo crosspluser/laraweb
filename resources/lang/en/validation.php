@@ -103,6 +103,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'name'           => [
+            'required' => ':attribute 必须传入',//在语言文件中指定自定义消息//可以重复定义
+        ],
     ],
 
     /*
@@ -116,6 +119,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => '名称',//在语言文件中指定自定义属性//可以重复定义
+    ],
 
 ];

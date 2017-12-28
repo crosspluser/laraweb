@@ -13,6 +13,7 @@
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Rules\Uppercase;
 
 Route::get( '/', function(){
     return view( 'welcome' );
@@ -127,6 +128,7 @@ Route::post( 'errors', function( \Illuminate\Http\Request $request ){
             //'required',//必需
             //'accepted',//yes, on, 1, true.服务条款是否同意
             //'active_url',//成功解析, a记录或aaaa记录
+            //'url',//网址格式:格式正确即可,不一定可访问
             //'after:tomorrow',//明天以后//与before相对应
             //'after:start_date',//开始时间(一个传入的验证字段)以后
             //'after_or_equal:tomorrow',//明天或以后
@@ -172,12 +174,22 @@ Route::post( 'errors', function( \Illuminate\Http\Request $request ){
             //'required_without:param1,param2,param3',//任一不存在
             //'required_without_all:param1,param2,param3',//全部不存在
             //'same:email',//相同:可以其中一个为null,可以同时为空
-            //size//大小
+            //'size'//大小
             //'string',//非空字符串
             //'timezone',//时区标识符,如Asia/Shanghai等
             //unique:users,id,name1,name',//唯一值://第四个参数idColumn是指忽略哪个字段
             //connection.users自定义数据库
-            Rule::unique('users','id'),//需要定义字段
+            //Rule::unique('users','name')->ignore(1),//默认和待检测字段名相同;支持自定义字段
+            //'email' => Rule::unique('users')->where(function ($query) {
+                //$query->where('id', 1);//与条件
+                //$query->where('id', 1)->orWhere('id', 2);//或条件
+            //}),
+            //'sometimes',//传入才验证,类似非空
+            //'required',
+            //自定义验证规则
+            //new Uppercase(),//使用规则对象
+            'up',//使用扩展
+            //'foo',
         ],
         'file'=>[
             //'mimetypes:text/plain,image/gif',//mime类型:支持*通配符
@@ -189,6 +201,10 @@ Route::post( 'errors', function( \Illuminate\Http\Request $request ){
         'password.required' => ':attribute 必须传入',
         //'array.key' => ':attribute 必须传入',//嵌套数组
     ] );
+    //复杂的条件验证
+    //$validator->sometimes(['reason', 'cost'], 'required', function ($input) {
+        //return $input->games >= 100;//条件:$input自动映射到$validator里的输入参数
+    //});
     $errors = $validator->errors();
     $return = [
         'errors' => $errors,//错误消息

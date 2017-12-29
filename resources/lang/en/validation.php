@@ -105,8 +105,9 @@ return [
         ],
         'name'           => [
             'required' => ':attribute 必须传入',//在语言文件中指定自定义消息//可以重复定义
+            'uppercase' => ':attribute 必须大写',//自定义错误消息
+            'foo' => ':attribute 字段消息即使',//自定义错误消息:改名之前的字段有效
         ],
-        'uppercase' => ':attribute 必须大写',
     ],
 
     /*

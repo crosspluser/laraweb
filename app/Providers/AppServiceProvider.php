@@ -15,10 +15,9 @@ class AppServiceProvider extends ServiceProvider{
     public function boot(){
         //
         //使用扩展
-        Validator::extend( 'foo', function( $attribute, $value, $parameters, $validator ){
-            return $value == 'foo';
-        } );
-        Validator::extend( 'up', 'Uppercase@passes' );
+        Validator::extend( 'foo', function( $attribute, $value, $parameters, $validator ){return $value == 'foo';});
+        //Validator::extend( 'uppercase', 'App\Rules\Uppercase@passes' );
+        Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {return str_replace('foo','replacer',$message);});//换名//自定义错误消息
     }
 
     /**

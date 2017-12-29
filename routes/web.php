@@ -123,6 +123,7 @@ Route::post( 'make/request/after', function( \Illuminate\Http\Request $request )
 Route::post( 'errors', function( \Illuminate\Http\Request $request ){
     //dd( $request->input());
     //dd( $request->all());
+    Validator::extendImplicit('implicit', function ($attribute, $value, $parameters, $validator) {return $value === 'implicit';});//隐式扩展//随调随用
     $validator = Validator::make( $request->all(), [
         'name' => [
             //'required',//必需
@@ -188,8 +189,9 @@ Route::post( 'errors', function( \Illuminate\Http\Request $request ){
             //'required',
             //自定义验证规则
             //new Uppercase(),//使用规则对象
-            'up',//使用扩展
             //'foo',
+            //'uppercase',//使用扩展
+            'implicit',
         ],
         'file'=>[
             //'mimetypes:text/plain,image/gif',//mime类型:支持*通配符

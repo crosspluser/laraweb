@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('blade', function () {
+    return view('layouts.child');
+});

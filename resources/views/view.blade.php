@@ -1,0 +1,1 @@
+View Data: {{$data ?? '没有数据'}}<br/>

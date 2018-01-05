@@ -12,6 +12,7 @@
 */
 
 use App\User;
+use App\Contracts\TestContract;
 
 Route::get( '/', function(){
     return view( 'welcome' );
@@ -65,4 +66,31 @@ Route::get( 'var', function(){
         'users' => $users,
         'bool'  => false,//true会死循环,导致模板一直没有输出值
     ] );
+} );
+
+//引入子视图
+Route::get( 'include', function(){
+    return view( 'include' );
+} );
+
+//堆栈
+Route::get( 'stack', function(){
+    return view( 'stack' );
+} );
+
+//服务注入
+Route::get( 'inject', function(){
+    return view( 'inject' );
+} );
+
+//服务提供者
+Route::get( 'provider', function(TestContract $test){
+    // $test = App::make('test');
+    // $test->callMe('TestController');
+    return $test->callMe('route provider');
+} );
+
+//拓展 Blade
+Route::get( 'extending', function(TestContract $test){
+    return view( 'extending' );
 } );

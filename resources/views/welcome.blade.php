@@ -79,7 +79,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Laravel {{ $name ?? '' }}<br />
+                    The current UNIX timestamp is {{ time() }}.
                 </div>
 
                 <div class="links">

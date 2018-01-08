@@ -36,3 +36,5 @@ Route::get( 'view', function(){
 
     return view( 'view' );
 } );
+
+//git config core.autocrlf false

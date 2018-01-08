@@ -3,20 +3,23 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 
-class AppServiceProvider extends ServiceProvider
-{
+class AppServiceProvider extends ServiceProvider{
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot()
-    {
+    public function boot(){
         //
-        Blade::directive('datetime', function ($expression) {
-            return "<?php echo ($expression)->format('m/d/Y H:i'); ?>";
-        });
+        Blade::directive( 'datetime', function( $expression ){
+            return "<?php echo ($expression)->format('m/d/Y H:i:s'); ?>";
+        } );
+
+        Blade::if( 'env', function( $environment ){
+            return app()->environment( $environment );
+        } );
     }
 
     /**
@@ -24,8 +27,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
+    public function register(){
         //
     }
 }

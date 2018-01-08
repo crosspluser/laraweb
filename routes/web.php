@@ -84,13 +84,16 @@ Route::get( 'inject', function(){
 } );
 
 //服务提供者
-Route::get( 'provider', function(TestContract $test){
+Route::get( 'provider', function( TestContract $test ){
     // $test = App::make('test');
     // $test->callMe('TestController');
-    return $test->callMe('route provider');
+    return $test->callMe( 'route provider' );
 } );
 
 //拓展 Blade
-Route::get( 'extending', function(TestContract $test){
-    return view( 'extending' );
+Route::get( 'extending', function(){
+    //会被缓存,可以用view:clear清理
+    return view( 'extending', [
+        'var' => new DateTime(),
+    ] );
 } );

@@ -13,6 +13,8 @@
 </head>
 <body>
 
+<!--基于 Laravel 的 Vue.js 中文学习教程 —— 数据绑定语法-->
+
 {{--1、插值--}}
 {{--文本--}}
 @verbatim
@@ -23,7 +25,7 @@
 
 <script type="text/javascript" src="{{asset('js/vue.js')}}"></script>
 <script type="text/javascript">
-
+    msg=1;
 </script>
 
 </body>

@@ -31,10 +31,6 @@ Route::get( 'vue-5606', function(){
     return view( 'vue-5606' );
 } );
 
-Route::get( 'vue-5621', function(){
-    return view( 'vue-5621' );
-} );
-
 /**
  * Q&A
  */

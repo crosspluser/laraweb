@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-
+// 处理用于重置密码的邮件链接
 class ForgotPasswordController extends Controller
 {
     /*

@@ -6,7 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+//处理新用户注册
 class RegisterController extends Controller
 {
     /*
@@ -36,6 +36,9 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        //如果使用 控制器，则可以在构造器中调用 middleware 方法来代替在路由中直接定义：
+        //$this->middleware('auth');//这里仅是举例,让注册前必须登录,形成死循环
+        //$this->middleware('auth:api');还可以指定一个键
         $this->middleware('guest');
     }
 
@@ -45,6 +48,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+    //自定义验证／存储
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -60,6 +64,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+    //自定义验证／存储
     protected function create(array $data)
     {
         return User::create([
